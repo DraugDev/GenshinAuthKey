@@ -7,8 +7,8 @@ if (-Not [System.IO.File]::Exists($path)) {
 }
 
 $logs = Get-Content -Path $path
-$m = $logs -match "(?m).:/.+(GenshinImpact_Data|YuanShen_Data)"
-$m[0] -match "(.:/.+(GenshinImpact_Data|YuanShen_Data))" >$null
+$m = $logs -match "(?m).:/.+(GenshinImpact_Data)"
+$m[0] -match "(.:/.+(GenshinImpact_Data))" >$null
 
 if ($matches.Length -eq 0) {
     Write-Host "Cannot find the wish history url! Make sure to open the wish history first!" -ForegroundColor Red
