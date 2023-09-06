@@ -6,8 +6,3 @@ Simple PowerShell script to get the AUTHKEY needed to fetch data from HoYoverse 
 ```
  iex "&{$((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/DraugDev/GenshinAuthKey/main/auth_key.ps1'))} global"
 ```
-### Or
-_If you need an oldschool URL_
-```
- iex "&{$((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/DraugDev/GenshinAuthKey/main/WishUrl.ps1'))} global"
-```
