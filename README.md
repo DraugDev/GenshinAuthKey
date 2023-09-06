@@ -1,4 +1,6 @@
-Simple PowerShell script to get the AUTHKEY needed to fetch data from HoYoverse API for counting Wishes.
+Simple PowerShell script to get the AUTHKEY needed to fetch data from HoYoverse API for counting Wishes. 
+
+# EU ONLY
 
 ### How to use: 
 ```
