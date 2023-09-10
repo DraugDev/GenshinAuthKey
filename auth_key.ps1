@@ -52,6 +52,7 @@ foreach ($authKey in $authKeys) {
         Write-Host "URL: "$url
         break
     } else {
-        Write-Host "authkey parameter not found."
+        $count++
+        Write-Host -NoNewline ("Searching: $count`r")
     }
 }
