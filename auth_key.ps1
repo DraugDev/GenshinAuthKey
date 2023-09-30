@@ -4,7 +4,7 @@ $path = [System.Environment]::ExpandEnvironmentVariables($logLocation)
 $param = $args[0];
 
 $authKeys = @()
-Write-Host "Using global location"
+
 $baseUrl = "https://hk4e-api-os.hoyoverse.com/event/gacha_info/api/getGachaLog"
 if ($param -eq "china") {
     Write-Host "Using china location"
