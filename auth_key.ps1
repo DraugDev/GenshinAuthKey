@@ -4,6 +4,11 @@ $path = [System.Environment]::ExpandEnvironmentVariables($logLocation)
 $authKeys = @()
 
 $baseUrl = "https://hk4e-api-os.hoyoverse.com/event/gacha_info/api/getGachaLog"
+if ($reg -eq "china") {
+    Write-Host "You are using china location"
+    $baseUrl = "https://hk4e-api.mihoyo.com/event/gacha_info/api/getGachaLog"
+}
+
 
 if (-Not [System.IO.File]::Exists($path)) {
     Write-Host "Cannot find the log file! Make sure to open the wish history first!" -ForegroundColor Red
@@ -20,7 +25,7 @@ if ($matches.Length -eq 0) {
 }
 
 $gamedir = $matches[1]
-$cachefile = "$gamedir/webCaches/2.15.0.0/Cache/Cache_Data/data_2"
+$cachefile = "$gamedir/webCaches/2.16.0.0/Cache/Cache_Data/data_2"
 $tmpfile = "$env:TEMP/ch_data_2"
 Write-Output $cachefile
 Copy-Item $cachefile -Destination $tmpfile
