@@ -52,7 +52,7 @@ Write-Host $authKeys.Length "Keys found"
 [array]::Reverse($authKeys)
 
 foreach ($authKey in $authKeys) {
-    $url = $baseUrl + "?authkey=$authKey&win_mode=fullscreen&authkey_ver=1&sign_type=2&auth_appid=webview_gacha&init_type=301&gacha_id=58776b704143c91eafe5f8f732a84821bd4be7e3&gacha_type=301&page=1&size=1&end_id=0"
+    $url = $baseUrl + "?authkey=$authKey&win_mode=fullscreen&authkey_ver=1&sign_type=2&auth_appid=webview_gacha&init_type=301&gacha_id=58776b704143c91eafe5f8f732a84821bd4be7e3&gacha_type=301&page=1&size=1&end_id=0&lang=en"
     $response = Invoke-RestMethod -Uri $url -Method Get -ContentType 'application/json'
 
     if($response.message -eq "OK") {
