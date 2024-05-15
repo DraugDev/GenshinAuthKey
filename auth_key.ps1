@@ -1,16 +1,9 @@
 $logLocation = "%userprofile%\AppData\LocalLow\miHoYo\Genshin Impact\output_log.txt"
 $path = [System.Environment]::ExpandEnvironmentVariables($logLocation)
 
-$param = $args[0];
-
 $authKeys = @()
 
-$baseUrl = "https://hk4e-api-os.hoyoverse.com/event/gacha_info/api/getGachaLog"
-if ($param -eq "china") {
-    Write-Host "Using china location"
-    $baseUrl = "https://hk4e-api.mihoyo.com/event/gacha_info/api/getGachaLog"
-}
-
+$baseUrl = "https://hk4e-api-os.hoyoverse.com/gacha_info/api/getGachaLog"
 
 if (-Not [System.IO.File]::Exists($path)) {
     Write-Host "Cannot find the log file! Make sure to open the wish history first!" -ForegroundColor Red
@@ -49,16 +42,13 @@ foreach ($inputString in $content) {
 }
 Write-Host $authKeys.Length "Keys found"
 
-[array]::Reverse($authKeys)
-
 foreach ($authKey in $authKeys) {
-    $url = $baseUrl + "?authkey=$authKey&win_mode=fullscreen&authkey_ver=1&sign_type=2&auth_appid=webview_gacha&init_type=301&gacha_id=58776b704143c91eafe5f8f732a84821bd4be7e3&gacha_type=301&page=1&size=1&end_id=0&lang=en"
+    $url = $baseUrl + "?authkey=$authKey&win_mode=fullscreen&authkey_ver=1&sign_type=2&auth_appid=webview_gacha&init_type=301&gacha_type=301&page=1&size=20&end_id=0&lang=ru"
     $response = Invoke-RestMethod -Uri $url -Method Get -ContentType 'application/json'
 
     if($response.message -eq "OK") {
         Set-Clipboard -Value $authkey
-        Write-Host "authkey value:`n`n$authkey`n`n"
-        Write-Host "URL: "$url
+        Write-Host "authkey value:`n`n$authkey"
         break
     } else {
         $count++
