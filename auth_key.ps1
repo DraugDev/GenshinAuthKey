@@ -43,7 +43,7 @@ foreach ($inputString in $content) {
 Write-Host $authKeys.Length "Keys found"
 
 foreach ($authKey in $authKeys) {
-    $url = $baseUrl + "?authkey=$authKey&win_mode=fullscreen&authkey_ver=1&sign_type=2&auth_appid=webview_gacha&init_type=301&gacha_type=301&page=1&size=20&end_id=0&lang=ru"
+    $url = $baseUrl + "?authkey=$authKey&win_mode=fullscreen&authkey_ver=1&sign_type=2&auth_appid=webview_gacha&init_type=301&gacha_type=301&page=1&size=20&end_id=0&lang=en"
     $response = Invoke-RestMethod -Uri $url -Method Get -ContentType 'application/json'
 
     if ($response.message -eq "OK") {
