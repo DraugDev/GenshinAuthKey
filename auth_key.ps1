@@ -3,7 +3,7 @@ $path = [System.Environment]::ExpandEnvironmentVariables($logLocation)
 
 $authKeys = @()
 
-$baseUrl = "https://hk4e-api-os.hoyoverse.com/gacha_info/api/getGachaLog"
+$baseUrl = "https://public-operation-hk4e-sg.hoyoverse.com/gacha_info/api/getGachaLog"
 
 if (-Not [System.IO.File]::Exists($path)) {
     Write-Host "Cannot find the log file! Make sure to open the wish history first!" -ForegroundColor Red
