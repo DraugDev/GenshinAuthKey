@@ -3,10 +3,10 @@ $path = [System.Environment]::ExpandEnvironmentVariables($logLocation)
 
 $authKeys = @()
 
-$baseUrl = "https://hk4e-api-os.hoyoverse.com/gacha_info/api/getGachaLog"
+$baseUrl = "https://public-operation-hk4e-sg.hoyoverse.com/gacha_info/api/getGachaLog"
 
 if (-Not [System.IO.File]::Exists($path)) {
-    Write-Host "Cannot find the log file! Make sure to open the wish history first!" -ForegroundColor Red
+    Write-Host "Cannot find the log file! Make sure to open the wish history first! Or try to restart your PowerShell as administrator" -ForegroundColor Red
     return
 }
 
@@ -20,7 +20,7 @@ if ($matches.Length -eq 0) {
 }
 
 $gamedir = $matches[1]
-$cachefile = "$gamedir/webCaches/2.24.0.0/Cache/Cache_Data/data_2"
+$cachefile = "$gamedir/webCaches/2.27.0.0/Cache/Cache_Data/data_2"
 $tmpfile = "$env:TEMP/ch_data_2"
 Write-Output $cachefile
 Copy-Item $cachefile -Destination $tmpfile
@@ -31,10 +31,10 @@ $pattern = 'authkey=(.*?)&game_biz'
 
 
 foreach ($inputString in $content) {
-    $matches = $inputString | Select-String -Pattern $pattern -AllMatches
+    $matchedData = $inputString | Select-String -Pattern $pattern -AllMatches
     
-    if ($matches.Matches.Count -gt 0) {
-        foreach ($match in $matches.Matches) {
+    if ($matchedData.Matches.Count -gt 0) {
+        foreach ($match in $matchedData.Matches) {
             $authKey = $match.Groups[1].Value
             $authKeys += "$authKey"
         }
@@ -46,11 +46,12 @@ foreach ($authKey in $authKeys) {
     $url = $baseUrl + "?authkey=$authKey&win_mode=fullscreen&authkey_ver=1&sign_type=2&auth_appid=webview_gacha&init_type=301&gacha_type=301&page=1&size=20&end_id=0&lang=ru"
     $response = Invoke-RestMethod -Uri $url -Method Get -ContentType 'application/json'
 
-    if($response.message -eq "OK") {
+    if ($response.message -eq "OK") {
         Set-Clipboard -Value $authkey
         Write-Host "authkey value:`n`n$authkey"
         break
-    } else {
+    }
+    else {
         $count++
         Write-Host -NoNewline ("Searching: $count`r")
     }
