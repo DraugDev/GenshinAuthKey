@@ -20,7 +20,7 @@ if ($matches.Length -eq 0) {
 }
 
 $gamedir = $matches[1]
-$cachefile = "$gamedir/webCaches/2.28.0.0/Cache/Cache_Data/data_2"
+$cachefile = "$gamedir/webCaches/2.30.0.0/Cache/Cache_Data/data_2"
 $tmpfile = "$env:TEMP/ch_data_2"
 Write-Output $cachefile
 Copy-Item $cachefile -Destination $tmpfile
