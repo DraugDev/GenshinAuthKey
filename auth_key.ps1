@@ -20,7 +20,12 @@ if ($matches.Length -eq 0) {
 }
 
 $gamedir = $matches[1]
-$cachefile = "$gamedir/webCaches/2.27.0.0/Cache/Cache_Data/data_2"
+
+$webCachesDir = "$gamedir/webCaches"
+$versionPattern = '^\d+\.\d+\.\d+\.\d+$'
+$latestPatchDir = Get-ChildItem -Path $webCachesDir -Directory | Where-Object { $_.Name -match $versionPattern } | Sort-Object { $_.Name } -Descending | Select-Object -First 1
+
+$cachefile = "$($latestPatchDir.FullName)\Cache\Cache_Data\data_2"
 $tmpfile = "$env:TEMP/ch_data_2"
 Write-Output $cachefile
 Copy-Item $cachefile -Destination $tmpfile
@@ -28,7 +33,6 @@ Copy-Item $cachefile -Destination $tmpfile
 $content = Get-Content -Encoding UTF8 -Raw $tmpfile
 
 $pattern = 'authkey=(.*?)&game_biz'
-
 
 foreach ($inputString in $content) {
     $matchedData = $inputString | Select-String -Pattern $pattern -AllMatches
